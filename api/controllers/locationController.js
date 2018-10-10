@@ -1,10 +1,21 @@
-// const debug = require('debug')('app');
+// const debug = require('debug')('app');\
+const ProductRepository = require('../repositories/productRepository');
 const LocationRepository = require('../repositories/locationRepository');
 
 const utilities = require('../../helpers/utilities');
 
 exports.listAllLocations = (req, res) => {
-  const locations = new LocationRepository()
+  let { lat } = req.query;
+  let { lon } = req.query;
+  let { distance } = req.query;
+
+  lat = parseFloat(lat);
+  lon = parseFloat(lon);
+  distance = parseInt(distance, 10);
+
+  const productRepository = new ProductRepository();
+  const locations = new LocationRepository(productRepository.get())
+    .filterByCoordinates(lat, lon, distance)
     .get();
 
   res.send(locations);
@@ -14,7 +25,8 @@ exports.getLocation = (req, res) => {
   let { locationId } = req.params;
   locationId = parseInt(locationId, 10);
 
-  const location = new LocationRepository()
+  const productRepository = new ProductRepository();
+  const location = new LocationRepository(productRepository.get())
     .filterById(locationId)
     .get();
 

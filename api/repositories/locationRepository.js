@@ -1,4 +1,4 @@
-const ProductRepository = require('../repositories/productRepository');
+const debug = require('debug')('app');
 
 function getUniqueLocations(products) {
   let locations = products.map(product => product.locations);
@@ -25,8 +25,7 @@ function getLocationProducts(products, id) {
   return locationProducts;
 }
 
-function LocationRepository() {
-  const products = new ProductRepository().get();
+function LocationRepository(products) {
   this.products = products;
 
   this.locations = getUniqueLocations(products);
@@ -38,6 +37,18 @@ LocationRepository.prototype.filterById = function filterById(id) {
 
   location.products = locationProducts;
   this.locations = location;
+
+  return this;
+};
+
+LocationRepository.prototype.filterByCoordinates = function filterByCoordinates(lat, lon, dist) {
+  debug(`Lat: ${lat}; Lon: ${lon}; Distance: ${dist}`);
+  if (!Number.isNaN(lat)
+    && !Number.isNaN(lon)
+    && !Number.isNaN(dist)) {
+    debug('filtering on coordinates');
+    // const locationRepository = new LocationRepository(this.products);
+  }
 
   return this;
 };
