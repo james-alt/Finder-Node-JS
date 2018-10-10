@@ -7,4 +7,8 @@ router.get('/', (req, res) => {
   productController.listAllProducts(req, res);
 });
 
+router.get('/:productId', (req, res) => {
+  productController.getProduct(req, res);
+});
+
 module.exports = router;

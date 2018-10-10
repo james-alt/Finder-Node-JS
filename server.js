@@ -8,6 +8,8 @@ const productRouter = require('./api/routes/productRouter');
 const app = express();
 const port = process.env.PORT || 3000;
 
+global.basedir = __dirname;
+
 app.use(morgan('tiny'));
 app.use('/products', productRouter);
 
