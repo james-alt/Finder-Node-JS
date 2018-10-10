@@ -1,16 +1,16 @@
-const fs = require('fs');
-const path = require('path');
+const ProductRepository = require('../repositories/productRepository');
+
+const utilities = require('../../helpers/utilities');
 
 exports.listAllProducts = (req, res) => {
   const { productType } = req.query;
-  let { products } = JSON.parse(fs.readFileSync(path.join(global.basedir, 'data', 'products.json')));
+  let { locationId } = req.query;
+  locationId = parseInt(locationId, 10);
 
-  if (productType != null) {
-    products = products.filter(product => product.type === productType);
-    if (products === undefined || products.length === 0) {
-      res.status(404).send({ url: `${req.originalUrl} not found` });
-    }
-  }
+  const products = new ProductRepository()
+    .filterByProductType(productType)
+    .filterByLocation(locationId)
+    .get();
 
   res.send(products);
 };
@@ -19,12 +19,13 @@ exports.getProduct = (req, res) => {
   let { productId } = req.params;
   productId = parseInt(productId, 10);
 
-  const { products } = JSON.parse(fs.readFileSync(path.join(global.basedir, 'data', 'products.json')));
-  const product = products.filter(prod => prod.id === productId);
+  const product = new ProductRepository()
+    .filterById(productId)
+    .get();
 
-  if (product === undefined || product.length === 0) {
+  if (utilities.isEmpty(product)) {
     res.status(404).send({ url: `${req.originalUrl} not found` });
   } else {
-    res.send(product[0]);
+    res.send(product);
   }
 };
