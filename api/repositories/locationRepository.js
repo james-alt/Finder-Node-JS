@@ -25,6 +25,30 @@ function getLocationProducts(products, id) {
   return locationProducts;
 }
 
+function getDistanceBetweenPoints(lat1, lon1, lat2, lon2) {
+  // convert points to radians
+  const ct = Math.PI / 180.0;
+  const point1 = { lat: lat1 * ct, lon: lon1 * ct };
+  const point2 = { lat: lat2 * ct, lon: lon2 * ct };
+
+  // radius of the earth
+  const radius = 3959.0; // value in miles, 6371 is km
+  const distance = Math.acos(Math.sin(point1.lat)
+    * Math.sin(point2.lat) + Math.cos(point1.lat)
+    * Math.cos(point2.lat) * Math.cos(point2.lon - point1.lon))
+    * radius;
+
+  return distance;
+}
+
+function AddDistanceToLocation(location, lat, lon) {
+  const distance = getDistanceBetweenPoints(lat, lon, location.latitude, location.longitude);
+
+  const newLocation = location;
+  newLocation.distance = distance;
+  return newLocation;
+}
+
 function LocationRepository(products) {
   this.products = products;
 
@@ -46,8 +70,22 @@ LocationRepository.prototype.filterByCoordinates = function filterByCoordinates(
   if (!Number.isNaN(lat)
     && !Number.isNaN(lon)
     && !Number.isNaN(dist)) {
-    debug('filtering on coordinates');
-    // const locationRepository = new LocationRepository(this.products);
+    let locations = this.locations
+      .map(location => AddDistanceToLocation(location, lat, lon));
+
+    locations = locations.filter(location => location.distance < dist);
+    locations = locations.sort((a, b) => {
+      if (a.distance < b.distance) {
+        return -1;
+      }
+      if (a.distance > b.distance) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    this.locations = locations;
   }
 
   return this;

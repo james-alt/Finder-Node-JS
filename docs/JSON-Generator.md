@@ -11,8 +11,8 @@
         name: '{{company()}}',
         address: '{{integer(100, 999)}} {{street()}}, Baton Rouge, LA, {{integer(70000, 70999)}}',
         phone: '+1 {{phone()}}',
-        latitude: '{{floating(-90.000001, -91.999999)}}',
-        longitude: '{{floating(30.000001, 30.999999)}}'
+        latitude: '{{floating(30.500001, 30.700001)}}',
+        longitude: '{{floating(-90.500001, -91.50001)}}'
       }
     }
   ],
