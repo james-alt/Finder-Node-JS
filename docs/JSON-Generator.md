@@ -6,7 +6,7 @@
 {
   "locations": [
     {
-      'repeat(20)': {
+      'repeat(100)': {
         id: '{{index()}}',
         name: '{{company()}}',
         address: '{{integer(100, 999)}} {{street()}}, Baton Rouge, LA, {{integer(70000, 70999)}}',
@@ -25,7 +25,7 @@
         type: '{{random("one", "two", "three")}}',
         locations: [
           {
-            'repeat(5,10)': function(tags, parent) {
+            'repeat(10,30)': function(tags, parent) {
               const index = tags.integer(0, parent.locations.length - 1);
               return parent.locations[index];
             }

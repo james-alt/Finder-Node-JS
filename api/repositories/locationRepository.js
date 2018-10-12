@@ -1,4 +1,5 @@
 const debug = require('debug')('app');
+const utilities = require('../../helpers/utilities');
 
 function getUniqueLocations(products) {
   let locations = products.map(product => product.locations);
@@ -66,7 +67,6 @@ LocationRepository.prototype.filterById = function filterById(id) {
 };
 
 LocationRepository.prototype.filterByCoordinates = function filterByCoordinates(lat, lon, dist) {
-  debug(`Lat: ${lat}; Lon: ${lon}; Distance: ${dist}`);
   if (!Number.isNaN(lat)
     && !Number.isNaN(lon)
     && !Number.isNaN(dist)) {
@@ -86,6 +86,20 @@ LocationRepository.prototype.filterByCoordinates = function filterByCoordinates(
     });
 
     this.locations = locations;
+  }
+
+  return this;
+};
+
+LocationRepository.prototype.filterByProductId = function filterByProductId(productId) {
+  if (!Number.isNaN(productId)) {
+    debug(`filtering by product id ${productId}`);
+    const product = this.products.find(prod => prod.id === productId);
+    if (!utilities.isEmpty(product)) {
+      const locationIds = product.locations.map(loc => loc.id);
+      this.locations = this.locations
+        .filter(location => locationIds.includes(location.id));
+    }
   }
 
   return this;

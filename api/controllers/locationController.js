@@ -5,10 +5,12 @@ const LocationRepository = require('../repositories/locationRepository');
 const utilities = require('../../helpers/utilities');
 
 exports.listAllLocations = (req, res) => {
+  let { productId } = req.query;
   let { lat } = req.query;
   let { lon } = req.query;
   let { distance } = req.query;
 
+  productId = parseInt(productId, 10);
   lat = parseFloat(lat);
   lon = parseFloat(lon);
   distance = parseInt(distance, 10);
@@ -16,6 +18,7 @@ exports.listAllLocations = (req, res) => {
   const productRepository = new ProductRepository();
   const locations = new LocationRepository(productRepository.get())
     .filterByCoordinates(lat, lon, distance)
+    .filterByProductId(productId)
     .get();
 
   res.send(locations);
