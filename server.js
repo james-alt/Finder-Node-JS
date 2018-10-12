@@ -1,5 +1,4 @@
 const express = require('express');
-const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
 
@@ -20,5 +19,5 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => {
-  debug(`Listening on port ${chalk.green(port)}`);
+  debug(`Listening on port ${port}`);
 });

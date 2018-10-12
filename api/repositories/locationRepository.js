@@ -5,14 +5,7 @@ function getUniqueLocations(products) {
   let locations = products.map(product => product.locations);
   locations = locations.reduce((prev, curr) => prev.concat(curr));
 
-  const prop = 'id';
-
-  const uniqueLocations = locations.filter((obj, pos, arr) => {
-    const locs = arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
-    return locs;
-  });
-
-  return uniqueLocations;
+  return utilities.uniqueArray(locations, 'id');
 }
 
 function getLocationProducts(products, id) {
@@ -74,16 +67,7 @@ LocationRepository.prototype.filterByCoordinates = function filterByCoordinates(
       .map(location => AddDistanceToLocation(location, lat, lon));
 
     locations = locations.filter(location => location.distance < dist);
-    locations = locations.sort((a, b) => {
-      if (a.distance < b.distance) {
-        return -1;
-      }
-      if (a.distance > b.distance) {
-        return 1;
-      }
-
-      return 0;
-    });
+    locations = locations.sort((a, b) => utilities.compareNumbers(a.distance, b.distance));
 
     this.locations = locations;
   }

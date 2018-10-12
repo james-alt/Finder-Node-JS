@@ -12,7 +12,11 @@ exports.listAllProducts = (req, res) => {
     .filterByLocation(locationId)
     .get();
 
-  res.send(products);
+  if (utilities.isEmpty(products)) {
+    res.status(404).send({ url: `${req.originalUrl} not found` });
+  } else {
+    res.send(products);
+  }
 };
 
 exports.getProduct = (req, res) => {

@@ -19,7 +19,6 @@ ProductRepository.prototype.filterByProductType = function filterByProductType(p
 ProductRepository.prototype.filterByLocation = function filterByLocation(locationId) {
   debug(`Location ID: ${locationId}`);
   if (!Number.isNaN(locationId)) {
-    debug('filtering on location');
     this.products = this.products.filter(prod => prod.locations.some(loc => loc.id === locationId));
   }
 

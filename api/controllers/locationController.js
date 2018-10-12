@@ -1,4 +1,3 @@
-// const debug = require('debug')('app');\
 const ProductRepository = require('../repositories/productRepository');
 const LocationRepository = require('../repositories/locationRepository');
 
@@ -21,7 +20,11 @@ exports.listAllLocations = (req, res) => {
     .filterByProductId(productId)
     .get();
 
-  res.send(locations);
+  if (utilities.isEmpty(locations)) {
+    res.status(404).send({ url: `${req.originalUrl} not found` });
+  } else {
+    res.send(locations);
+  }
 };
 
 exports.getLocation = (req, res) => {

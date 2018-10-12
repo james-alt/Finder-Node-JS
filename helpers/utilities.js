@@ -6,3 +6,17 @@ exports.isEmpty = (value) => {
 
   return val;
 };
+
+exports.compareNumbers = (a, b) => {
+  if (a < b) return -1;
+  if (a > b) return 1;
+  return 0;
+};
+
+exports.uniqueArray = (array, key) => {
+  const uniqueItems = array.filter((obj, pos, arr) => {
+    const items = arr.map(mapObj => mapObj[key]).indexOf(obj[key]) === pos;
+    return items;
+  });
+  return uniqueItems;
+};
