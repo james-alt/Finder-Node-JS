@@ -1,23 +1,15 @@
 const ProductRepository = require('../repositories/productRepository');
-
 const utilities = require('../../helpers/utilities');
 
 exports.listAllProducts = (req, res) => {
   const { productType } = req.query;
   let { locationId } = req.query;
-  let { lat } = req.query;
-  let { lon } = req.query;
-  let { distance } = req.query;
 
   locationId = parseInt(locationId, 10);
-  lat = parseFloat(lat);
-  lon = parseFloat(lon);
-  distance = parseInt(distance, 10);
 
   const products = new ProductRepository()
     .filterByProductType(productType)
     .filterByLocation(locationId)
-    .filterByCoordinates(lat, lon, distance)
     .get();
 
   res.send(products);
