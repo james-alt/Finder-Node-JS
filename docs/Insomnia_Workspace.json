@@ -1,0 +1,163 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2020-05-31T02:58:18.401Z",
+  "__export_source": "insomnia.desktop.app:v7.1.1",
+  "resources": [
+    {
+      "_id": "req_931ee6e7adca449888064ce296ce0840",
+      "authentication": {},
+      "body": {},
+      "created": 1590893688797,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590893688797,
+      "method": "GET",
+      "modified": 1590893823639,
+      "name": "Locations By Location",
+      "parameters": [
+        {
+          "description": "",
+          "id": "pair_8cfbb87c844b4f8a9675e3ccade4e901",
+          "name": "lat",
+          "value": "30.5"
+        },
+        {
+          "description": "",
+          "id": "pair_4e311057035b418492057ffeca338e6f",
+          "name": "lon",
+          "value": "-90.8"
+        },
+        {
+          "description": "",
+          "id": "pair_ffba83a90857476b80730b72f8a2771e",
+          "name": "distance",
+          "value": "15"
+        }
+      ],
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{baseUrl}}/locations",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "created": 1590862916143,
+      "description": "",
+      "modified": 1590862916143,
+      "name": "Node Finder",
+      "parentId": null,
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_637c9c5077674d278667257ec3c5ebe5",
+      "authentication": {},
+      "body": {},
+      "created": 1590893601017,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590893601017,
+      "method": "GET",
+      "modified": 1590893722764,
+      "name": "Locations By Product",
+      "parameters": [
+        {
+          "description": "",
+          "id": "pair_24a4ea84b8f34e129450271868c4faaf",
+          "name": "productId",
+          "value": "1"
+        }
+      ],
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{baseUrl}}/products{{baseUrl}}/locations",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6cd347cf617d431f998c758d67b79609",
+      "authentication": {},
+      "body": {},
+      "created": 1590893573914,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590893573914,
+      "method": "GET",
+      "modified": 1590893587194,
+      "name": "Product Types",
+      "parameters": [],
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{baseUrl}}/productTypes",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eebdb358550a4d858ddf368ca2785fa2",
+      "authentication": {},
+      "body": {},
+      "created": 1590863127522,
+      "description": "",
+      "headers": [],
+      "isPrivate": false,
+      "metaSortKey": -1590863127522,
+      "method": "GET",
+      "modified": 1590863140446,
+      "name": "Products",
+      "parameters": [],
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingFollowRedirects": "global",
+      "settingRebuildPath": true,
+      "settingSendCookies": true,
+      "settingStoreCookies": true,
+      "url": "{{baseUrl}}/products",
+      "_type": "request"
+    },
+    {
+      "_id": "env_a618ffca30efc4d5b45df273f4509ec7567e5911",
+      "color": null,
+      "created": 1590862916635,
+      "data": {
+        "baseUrl": "http://localhost:49160"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "baseUrl"
+        ]
+      },
+      "isPrivate": false,
+      "metaSortKey": 1590862916635,
+      "modified": 1590886368972,
+      "name": "Base Environment",
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_a618ffca30efc4d5b45df273f4509ec7567e5911",
+      "cookies": [],
+      "created": 1590862916646,
+      "modified": 1590862916646,
+      "name": "Default Jar",
+      "parentId": "wrk_b185e5fcd2c24c0ebf2122e38c0b596e",
+      "_type": "cookie_jar"
+    }
+  ]
+}
